@@ -15,6 +15,72 @@
     <link rel="stylesheet" type="text/css" href="styles.css"/>
 </head>
 <body>
+    <div id="app">
+        <div class="navbar">
+            <ul>
+                <li>
+                    <a class="active" href="#home" v-text="sitename"></a>
+                </li>
+
+                <div class="checkout">
+                    <button v-if="enableCheckout" v-on:click="showCheckout">{{cartItemCount}}<span class="fas fa-cart-plus"></span>Checkout</button>
+                </div>
+            </ul>
+        </div>
+
+        <div v-if="showLesson">
+            <p>
+                <label>Search Lesson: </label>
+                <input type="text" v-model="search" placeholder="Type something">
+            </p>
+
+            <h3>Sort Results</h3>
+
+            <p>
+                <input type="radio" id="subject" value="Subject" v-model="sortBy" >
+                <label for="subject">Subject</label>
+
+                <input type="radio" id="location" value="Location" v-model="sortBy">
+                <label for="location">Location</label>
+
+                <input type="radio" id="price" value="Price" v-model="sortBy">
+                <label for="price">Price</label>
+
+                <input type="radio" id="availability" value="Availability" v-model="sortBy">
+                <label for="availability">Availability</label>
+            </p>
+                <input type="radio" id="ascending" value="Ascending" v-model="sortOrder">
+                <label for="ascending">Ascending</label>
+
+                <input type="radio" id="descending" value="Descending" v-model="sortOrder">
+                <label for="descending">Descending</label>
+            <p>
+
+            </p>
+        </div>
+    </div>
+
+
+
+
+    <script>
+        let webstore = new Vue ({
+            el: "app",
+            data: {
+                sitename: 'Al-Ilm School Extracurricular Activities',
+                lessons: lessons,
+                cart: [],
+                showLesson: true,
+                order: {
+                    name: '',
+                    phone: ''
+                },
+                sortBy: "Subject",
+                sortOrder: "Ascending",
+                search: '',
+            }
+        })
+    </script>
     
 </body>
 </html>
