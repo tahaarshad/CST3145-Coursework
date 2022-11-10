@@ -168,6 +168,9 @@
                 showCheckout: function() {
                     this.showLesson = this.showLesson? false: true;
                 },
+                submitForm (order) {
+                    alert('Order Successful');
+                },
 
             },
             computed: {
@@ -176,6 +179,11 @@
                  },
                 enableCheckout: function() {
                     return this.cart.length > 0
+                 },
+                 enableSubmit: function() {
+                    let isnum = /^\d+$/.test(this.order.phone);
+                    let isletter = /^[A-Za-z]+$/.test(this.order.name);
+                    return isnum == true && isletter == true
                  },
                 sortedLessons () {
                     tempLessons = this.lessons;
