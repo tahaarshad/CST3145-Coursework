@@ -72,6 +72,49 @@
                 </div>
             </div>
         </div>
+
+        <div v-else>
+            <h2>Shopping Cart</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Lesson</th>
+                        <th>Location</th>
+                        <th>Space</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="item in cart">
+                        <td>{{item.lesson.Subject}}</td>
+                        <td>{{item.lesson.Location}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{item.lesson.Price}}</td>
+                        <td>
+                            <button v-on:click="removeItem(item)">Remove</button>
+                        </td>
+
+
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Checkout</h2>
+            <p>
+                <strong>Name:</strong>
+                <input v-model="order.name">
+            </p>
+            <p>
+                <strong>Phone:</strong>
+                <input v-model.number="order.phone">
+            </p>
+            <!-- <p>{{order.name}}</p>
+            <p>{{order.phone}}</p> -->
+            <button v-if="enableSubmit" v-on:click="submitForm(order)">Checkout</button>
+            <button disabled v-else>Checkout</button>
+
+
+        </div>
     </div>
 
 
@@ -94,6 +137,28 @@
                 search: '',
             },
             methods: {
+                getCartItem(lesson) {
+                    for (i = 0; i < this.cart.length; i++) {
+                        if(this.cart[i].lesson.id === lesson.id) {
+                            return this.cart[i]
+                        }
+                    }
+                    return null
+                },
+                addToCart (lesson) {
+                    let cartItem = this.getCartItem(lesson);
+      
+                    if (cartItem != null) {
+                        cartItem.quantity++;
+                    } else {
+                        this.cart.push({
+                        lesson: lesson,
+                        quantity: 1
+                        });
+                    }
+                    lesson.Space--;
+
+                },
 
             },
             computed: {
