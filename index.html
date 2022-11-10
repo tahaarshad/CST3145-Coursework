@@ -171,6 +171,12 @@
 
             },
             computed: {
+                cartItemCount: function(){
+                    return this.cart.length
+                 },
+                enableCheckout: function() {
+                    return this.cart.length > 0
+                 },
                 sortedLessons () {
                     tempLessons = this.lessons;
 
