@@ -78,6 +78,127 @@
                 sortBy: "Subject",
                 sortOrder: "Ascending",
                 search: '',
+            },
+            methods: {
+
+            },
+            computed: {
+                sortedLessons () {
+                    tempLessons = this.lessons;
+
+                    if (this.search != '' && this.search) {
+                        tempLessons = tempLessons.filter((item) => {
+                            return item.Subject.toUpperCase().includes(this.search.toUpperCase()) ||
+                            item.Location.toUpperCase().includes(this.search.toUpperCase())
+                        })
+                    
+                    }
+                    else if (this.sortBy == 'Subject' && this.sortOrder == 'Ascending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            let fa = a.Subject.toLowerCase(), fb = b.Subject.toLowerCase()
+          
+                            if (fa < fb) {
+                                return -1
+                            }
+                            if (fa > fb) {
+                                return 1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    else if (this.sortBy == 'Subject' && this.sortOrder == 'Descending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            let fa = a.Subject.toLowerCase(), fb = b.Subject.toLowerCase()
+          
+                            if (fa < fb) {
+                                return 1
+                            }
+                            if (fa > fb) {
+                                return -1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    else if (this.sortBy == 'Location' && this.sortOrder == 'Ascending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            let fa = a.Location.toLowerCase(), fb = b.Location.toLowerCase()
+          
+                            if (fa < fb) {
+                                return -1
+                            }
+                            if (fa > fb) {
+                                return 1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    else if (this.sortBy == 'Location' && this.sortOrder == 'Descending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            let fa = a.Location.toLowerCase(), fb = b.Location.toLowerCase()
+          
+                            if (fa < fb) {
+                                return 1
+                            }
+                            if (fa > fb) {
+                                return -1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    else if (this.sortBy == 'Price' && this.sortOrder == 'Ascending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            if (a.Price < b.Price) {
+                                return -1
+                            }
+                            if (a.Price > b.Price) {
+                                return 1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    else if (this.sortBy == 'Price' && this.sortOrder == 'Descending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            if (a.Price < b.Price) {
+                                return 1
+                            }
+                            if (a.Price > b.Price) {
+                                return -1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    else if (this.sortBy == 'Availability' && this.sortOrder == 'Ascending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            if (a.Space < b.Space) {
+                                return -1
+                            }
+                            if (a.Space > b.Space) {
+                                return 1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    else if (this.sortBy == 'Availability' && this.sortOrder == 'Descending'){
+                        tempLessons = tempLessons.sort((a,b) => {
+                            if (a.Space < b.Space) {
+                                return 1
+                            }
+                            if (a.Space > b.Space) {
+                                return -1 
+                            }
+                            return 0
+
+                        })
+                    }
+                    return tempLessons
+                },
             }
         })
     </script>
