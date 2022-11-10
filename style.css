@@ -64,3 +64,20 @@ button[disabled] {
 label {
     font-weight: 700;
 }
+input[type=text] {
+    width: 25%;
+  }
+
+table {
+    width: 100%;
+}
+th {
+    text-align: left;
+  }
+td {
+    text-align: left;
+    height: 50px;
+  }
+  th, td {
+    border-bottom: 1px solid #ddd;
+  }
