@@ -16,6 +16,7 @@
 </head>
 <body>
     <div id="app">
+        <!--Navigation Bar-->
         <div class="navbar">
             <ul>
                 <li>
@@ -30,11 +31,13 @@
         </div>
 
         <div v-if="showLesson">
+            <!--Search Bar-->
             <p>
                 <label>Search Lesson: </label>
                 <input type="text" v-model="search" placeholder="Type something">
             </p>
 
+            <!--Sorting-->
             <h3>Sort Results</h3>
 
             <p>
@@ -58,6 +61,8 @@
                 <label for="descending">Descending</label>
             </p>
 
+
+            <!--Display Lessons-->
             <div class="lesson-container">
                 <div v-for ="(lesson, key) in sortedLessons" class="item">
                     <figure>
@@ -75,6 +80,8 @@
         </div>
 
         <div v-else>
+
+            <!--Checkout Page-->
             <h2>Shopping Cart</h2>
             <table>
                 <thead>
@@ -109,8 +116,6 @@
                 <strong>Phone:</strong>
                 <input v-model.number="order.phone">
             </p>
-            <!-- <p>{{order.name}}</p>
-            <p>{{order.phone}}</p> -->
             <button v-if="enableSubmit" v-on:click="submitForm(order)">Checkout</button>
             <button disabled v-else>Checkout</button>
 
@@ -123,21 +128,25 @@
 
     <script>
         let webstore = new Vue ({
-            el: 'app',
+            el: '#app',
             data: {
                 sitename: 'Al-Ilm School Extracurricular Activities',
                 lessons: lessons,
+                // Stores cart items
                 cart: [],
                 showLesson: true,
+                // Stores user information to confirm order
                 order: {
                     name: '',
                     phone: ''
                 },
+                // Stores user input and selection
                 sortBy: 'Subject',
                 sortOrder: 'Ascending',
                 search: '',
             },
             methods: {
+                // Checks if lesson is already in cart or not
                 getCartItem(lesson) {
                     for (i = 0; i < this.cart.length; i++) {
                         if(this.cart[i].lesson.id === lesson.id) {
@@ -146,9 +155,10 @@
                     }
                     return null
                 },
+                // Adds lesson to cart
                 addToCart (lesson) {
                     let cartItem = this.getCartItem(lesson);
-      
+                    //If item is already in cart, then increase quantity. If not, push lesson to cart
                     if (cartItem != null) {
                         cartItem.quantity++;
                     } else {
@@ -160,32 +170,39 @@
                     lesson.Space--;
 
                 },
+                // Removes lesson from cart and adds the quantity back to lesson Space
                 removeItem(item) {
                     item.lesson.Space += item.quantity;
                     let itemIndex = this.cart.indexOf(item);
                     this.cart.splice(itemIndex, 1);
                     
                 },
+                // Checkout page toggle
                 showCheckout: function() {
                     this.showLesson = this.showLesson? false: true;
                 },
+                // Confirm Order
                 submitForm (order) {
                     alert('Order Successful');
                 },
 
             },
             computed: {
+                // Returns number of items in cart
                 cartItemCount: function(){
                     return this.cart.length
                  },
+                 // Checkout button enables when cart lenght is more than 0
                 enableCheckout: function() {
                     return this.cart.length > 0
                  },
+                 // Validates user input using regular expressions
                  enableSubmit: function() {
                     let isnum = /^\d+$/.test(this.order.phone);
                     let isletter = /^[A-Za-z]+$/.test(this.order.name);
                     return isnum == true && isletter == true
                  },
+                 // Filters lessons based on user input and sorts results based on user selection
                 sortedLessons () {
                     tempLessons = this.lessons;
 
