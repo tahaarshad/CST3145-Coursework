@@ -10,7 +10,7 @@
     <!--Link Lessons.js File-->
     <script src="lessons.js"></script>
     <!--Import FontAwesome Library-->
-    <script src="https://kit.fontawesome.com/a034fe5f30.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/e62066c739.js" crossorigin="anonymous"></script>
     <!--Link CSS File for styling-->
     <link rel="stylesheet" type="text/css" href="styles.css"/>
 </head>
@@ -24,6 +24,7 @@
 
                 <div class="checkout">
                     <button v-if="enableCheckout" v-on:click="showCheckout">{{cartItemCount}}<span class="fas fa-cart-plus"></span>Checkout</button>
+                    <button disabled v-else><span class="fas fa-cart-plus"></span>Checkout</button>
                 </div>
             </ul>
         </div>
@@ -122,7 +123,7 @@
 
     <script>
         let webstore = new Vue ({
-            el: "app",
+            el: 'app',
             data: {
                 sitename: 'Al-Ilm School Extracurricular Activities',
                 lessons: lessons,
@@ -132,8 +133,8 @@
                     name: '',
                     phone: ''
                 },
-                sortBy: "Subject",
-                sortOrder: "Ascending",
+                sortBy: 'Subject',
+                sortOrder: 'Ascending',
                 search: '',
             },
             methods: {
