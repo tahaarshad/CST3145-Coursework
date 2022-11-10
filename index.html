@@ -49,14 +49,28 @@
                 <input type="radio" id="availability" value="Availability" v-model="sortBy">
                 <label for="availability">Availability</label>
             </p>
+            <p>
                 <input type="radio" id="ascending" value="Ascending" v-model="sortOrder">
                 <label for="ascending">Ascending</label>
 
                 <input type="radio" id="descending" value="Descending" v-model="sortOrder">
                 <label for="descending">Descending</label>
-            <p>
-
             </p>
+
+            <div class="lesson-container">
+                <div v-for ="(lesson, key) in sortedLessons" class="item">
+                    <figure>
+                        <img v-bind:src=`${lesson.Image}`>
+                    </figure>
+                    <p>Subject: <span v-text="lesson.Subject"></span></p>
+                    <p>Location: <span v-text="lesson.Location"></span></p>
+                    <p>Price: <span v-text="lesson.Price"></span> AED</p>
+                    <p>Available Spaces: <span v-text="lesson.Space"></span></p>
+        
+                    <button v-on:click="addToCart(lesson)" v-if="lesson.Space > 0">Add to Cart</button>
+                    <button v-else disabled>Add to Cart</button>
+                </div>
+            </div>
         </div>
     </div>
 
