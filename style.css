@@ -3,22 +3,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
 
 .navbar{
-    background-color: rgb(73, 132, 226);
-    border-radius: 10px;
+    overflow: hidden;
+    background-color: #e9e9e9;
 }
 
-.navbar li{
-    float:left;
-    list-style: none; 
-    margin: 13px 20px;
-}
-.navbar ul{
-    overflow: auto;
-}
-.navbar li a{
-    padding: 3px 3px;
+.navbar a{
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
     text-decoration: none;
-    color: white;
     font-size: 17px;
 }
 .checkout {
@@ -28,6 +23,25 @@
     color: black;
     background: white;
     height: 45px;
+}
+.search {
+    overflow: hidden;
+    padding: 14px 16px;
+}
+.search h2 {
+    float: left;
+    display: block;
+    color: black;
+    text-align: center;
+    /* padding: 14px 16px; */
+    text-decoration: none;
+    font-size: 20px;
+}
+.search p {
+    float: right;
+}
+.search label {
+    font-size: 20px;
 }
 .lesson-container {
     display: flex;
@@ -46,13 +60,13 @@
 }
 
 img {
-    width: 350px;
-    height: 350px;
+    width: 300px;
+    height: 300px;
 }
 
 button {
-    background: rgb(73, 132, 226);;
-    color: white;
+    background: #e9e9e9;
+    color: black;
     border-radius: 10px;
     padding: 7px 20px;
 }
@@ -65,7 +79,8 @@ label {
     font-weight: 700;
 }
 input[type=text] {
-    width: 25%;
+    width: 50%;
+    border-radius: 5px;
   }
 
 table {
@@ -80,4 +95,10 @@ td {
   }
   th, td {
     border-bottom: 1px solid #ddd;
+  }
+
+  aside {
+    float: left;
+    padding: 10px;
+    width: 200px;
   }

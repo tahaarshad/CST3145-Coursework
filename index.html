@@ -10,7 +10,7 @@
     <!--Link Lessons.js File-->
     <script src="lessons.js"></script>
     <!--Import FontAwesome Library-->
-    <script src="https://kit.fontawesome.com/e62066c739.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/a034fe5f30.js" crossorigin="anonymous"></script>
     <!--Link CSS File for styling-->
     <link rel="stylesheet" type="text/css" href="style.css"/>
 </head>
@@ -18,48 +18,50 @@
     <div id="app">
         <!--Navigation Bar-->
         <div class="navbar">
-            <ul>
-                <li>
-                    <a class="active" href="#home" v-text="sitename"></a>
-                </li>
+            <a class="active" v-on:click="showCheckout" v-text="sitename"></a>
 
-                <div class="checkout">
-                    <button v-if="enableCheckout" v-on:click="showCheckout">{{cartItemCount}}<span class="fas fa-cart-plus"></span>Checkout</button>
-                    <button disabled v-else><span class="fas fa-cart-plus"></span>Checkout</button>
-                </div>
-            </ul>
+            <div class="checkout">
+                <button v-if="enableCheckout" v-on:click="showCheckout">{{cartItemCount}}<span class="fa-solid fa-cart-shopping"></span></button>
+                <button disabled v-else><span class="fa-solid fa-cart-shopping"></span></button>
+            </div>
         </div>
 
         <div v-if="showLesson">
             <!--Search Bar-->
+            <div class="search">
+            <h2>Extracurricular Activities</h2>
+            
             <p>
                 <label>Search Lesson: </label>
-                <input type="text" v-model="search" placeholder="Type something">
+                <input type="text" v-model="search">
             </p>
+            </div>
 
             <!--Sorting-->
+            <aside>
             <h3>Sort Results</h3>
 
             <p>
                 <input type="radio" id="subject" value="Subject" v-model="sortBy" >
                 <label for="subject">Subject</label>
-
+                <br>
                 <input type="radio" id="location" value="Location" v-model="sortBy">
                 <label for="location">Location</label>
-
+                <br>
                 <input type="radio" id="price" value="Price" v-model="sortBy">
                 <label for="price">Price</label>
-
+                <br>
                 <input type="radio" id="availability" value="Availability" v-model="sortBy">
                 <label for="availability">Availability</label>
             </p>
             <p>
                 <input type="radio" id="ascending" value="Ascending" v-model="sortOrder">
                 <label for="ascending">Ascending</label>
-
+                <br>
                 <input type="radio" id="descending" value="Descending" v-model="sortOrder">
                 <label for="descending">Descending</label>
             </p>
+             </aside>
 
 
             <!--Display Lessons-->
@@ -130,7 +132,7 @@
         let webstore = new Vue ({
             el: '#app',
             data: {
-                sitename: 'Al-Ilm School Extracurricular Activities',
+                sitename: 'Al-Ilm School',
                 lessons: lessons,
                 // Stores cart items
                 cart: [],
