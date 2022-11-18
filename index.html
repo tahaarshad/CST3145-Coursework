@@ -13,115 +13,170 @@
     <script src="https://kit.fontawesome.com/a034fe5f30.js" crossorigin="anonymous"></script>
     <!--Link CSS File for styling-->
     <link rel="stylesheet" type="text/css" href="style.css"/>
+    <!--Bootstrap CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
         <!--Navigation Bar-->
-        <div class="navbar">
-            <a class="active" v-on:click="showCheckout" v-text="sitename"></a>
-
-            <div class="checkout">
-                <button v-if="enableCheckout" v-on:click="showCheckout">{{cartItemCount}}<span class="fa-solid fa-cart-shopping"></span></button>
-                <button disabled v-else><span class="fa-solid fa-cart-shopping"></span></button>
+        <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" v-on:click="showCheckout"><span class="fa-solid fa-school-flag fs-4"></span> {{sitename}}</a>
+                </div>
+                <a class="nav navbar-nav navbar-right" v-if="enableCheckout" v-on:click="showCheckout"><i class="fa-solid fa-cart-shopping fs-4 position-relative"></i>
+                    <span class="badge bg-danger border border-light rounded-circle">{{cartItemCount}}</span>
+                </a>
+                <a class="nav navbar-nav navbar-right disabled" v-else v-on:click="showCheckout"><i class="fa-solid fa-cart-shopping fs-4 position-relative"></i>
+                </a>
             </div>
-        </div>
+        </nav>
 
         <div v-if="showLesson">
-            <!--Search Bar-->
-            <div class="search">
-            <h2>Extracurricular Activities</h2>
-            
-            <p>
-                <label>Search Lesson: </label>
-                <input type="text" v-model="search">
-            </p>
+            <!--Hero Section-->
+            <div class="container text-center py-5 mb-4 ">
+                <div class="p-5 mb-4 lc-block">
+                    <div class="lc-block mb-4">
+                        <div editable="rich">
+                            <h2 class="fw-bold display-2">Extracurricular Activities</h2>
+                        </div>
+                    </div>
+                    <div class="lc-block mb-5">
+                        <div editable="rich">
+                            <p class="lead">Below are a list of activities taking place after school timings for students to expand their skills and knowledge</p>
+                        </div>
+                    </div>
+                    <!--Search-->
+                    <div class="lc-block mb-2">
+                        <div class="form-outline">
+                            <input type="search" v-model="search" class="form-control" placeholder="Search Lesson">
+                            <br>
+                            <div class="container">
+                                <!--Sort-->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <h4>Sort Lessons:</h4>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" aria-label="Default select example" v-model="sortBy">
+                                            <option value="Subject">Subject</option>
+                                            <option value="Location">Location</option>
+                                            <option value="Price">Price</option>
+                                            <option value="Availability">Availability</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <select class="form-select" aria-label="Default select example" v-model="sortOrder">
+                                            <option value="Ascending">Ascending</option>
+                                            <option value="Descending">Descending</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <!--Sorting-->
-            <aside>
-            <h3>Sort Results</h3>
-
-            <p>
-                <input type="radio" id="subject" value="Subject" v-model="sortBy" >
-                <label for="subject">Subject</label>
-                <br>
-                <input type="radio" id="location" value="Location" v-model="sortBy">
-                <label for="location">Location</label>
-                <br>
-                <input type="radio" id="price" value="Price" v-model="sortBy">
-                <label for="price">Price</label>
-                <br>
-                <input type="radio" id="availability" value="Availability" v-model="sortBy">
-                <label for="availability">Availability</label>
-            </p>
-            <p>
-                <input type="radio" id="ascending" value="Ascending" v-model="sortOrder">
-                <label for="ascending">Ascending</label>
-                <br>
-                <input type="radio" id="descending" value="Descending" v-model="sortOrder">
-                <label for="descending">Descending</label>
-            </p>
-             </aside>
-
-
-            <!--Display Lessons-->
-            <div class="lesson-container">
-                <div v-for ="(lesson, key) in sortedLessons" class="item">
-                    <figure>
-                        <img v-bind:src=`${lesson.Image}`>
-                    </figure>
-                    <p>Subject: <span v-text="lesson.Subject"></span></p>
-                    <p>Location: <span v-text="lesson.Location"></span></p>
-                    <p>Price: <span v-text="lesson.Price"></span> AED</p>
-                    <p>Available Spaces: <span v-text="lesson.Space"></span></p>
-        
-                    <button v-on:click="addToCart(lesson)" v-if="lesson.Space > 0">Add to Cart</button>
-                    <button v-else disabled>Add to Cart</button>
+            <!--Lessons-->
+            <div class="container">
+                <div class="row">
+                    <template v-for ="(lesson, key) in sortedLessons">
+                        <div class="col-md-3">
+                            <div class="card">
+                                <img class="card-img-top" v-bind:src=`${lesson.Image}`>
+                                <div class="card-body">
+                                    <h5 class="card-title" v-text="lesson.Subject"></h5>
+                                </div>
+                                <ul class="list-group list-group-flush">
+                                    <li class="list-group-item"><span v-text="lesson.Location"></span></li>
+                                    <li class="list-group-item"><span v-text="lesson.Price"></span> AED</li>
+                                    <li class="list-group-item"><span v-text="lesson.Space"></span> Seats Available</span></li>
+                                </ul>
+                                <div class="card-body">
+                                    <button v-on:click="addToCart(lesson)" v-if="lesson.Space > 0">Add to Cart</button>
+                                    <button v-else disabled>Add to Cart</button>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
                 </div>
             </div>
         </div>
 
         <div v-else>
+            <!--Hero Section-->
+            <div class="container text-center py-5 mb-4 ">
+                <div class="p-5 mb-4 lc-block">
+                    <div class="lc-block mb-4">
+                        <div editable="rich">
+                            <h2 class="fw-bold display-2">Checkout Form</h2>
+                        </div>
+                    </div>
+                    <div class="lc-block mb-5">
+                        <div editable="rich">
+                            <p class="lead">Please review you cart and confirm booking</p>
+                        </div>
+                    </div>
+                </div>
 
-            <!--Checkout Page-->
-            <h2>Shopping Cart</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Lesson</th>
-                        <th>Location</th>
-                        <th>Space</th>
-                        <th>Price</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr v-for="item in cart">
-                        <td>{{item.lesson.Subject}}</td>
-                        <td>{{item.lesson.Location}}</td>
-                        <td>{{item.quantity}}</td>
-                        <td>{{item.lesson.Price}}</td>
-                        <td>
-                            <button v-on:click="removeItem(item)">Remove</button>
-                        </td>
-
-
-                    </tr>
-                </tbody>
-            </table>
-
-            <h2>Checkout</h2>
-            <p>
-                <strong>Name:</strong>
-                <input v-model="order.name">
-            </p>
-            <p>
-                <strong>Phone:</strong>
-                <input v-model.number="order.phone">
-            </p>
-            <button v-if="enableSubmit" v-on:click="submitForm(order)">Checkout</button>
-            <button disabled v-else>Checkout</button>
-
-
+                <!--Cart-->
+                <h3>Cart</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Lesson</th>
+                            <th>Location</th>
+                            <th>Space</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="item in cart">
+                            <td>{{item.lesson.Subject}}</td>
+                            <td>{{item.lesson.Location}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.lesson.Price}}</td>
+                            <td>
+                                <a v-on:click="removeItem(item)"><i class="fa-solid fa-trash"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <!--Checkout Form-->
+                <h3>Checkout</h3>
+                <p>
+                    <strong>Name:</strong>
+                    <input v-model="order.name">
+                </p>
+                <p>
+                    <strong>Phone:</strong>
+                    <input v-model.number="order.phone">
+                </p>
+                <button v-if="enableSubmit" data-bs-toggle="modal" data-bs-target="#confirmSeats">Checkout</button>
+                <button disabled v-else>Checkout</button>
+            </div>
+            <!--Confirmation Dialog-->
+            <div class="modal fade" id="confirmSeats" tabindex="-1" role="dialog" aria-labelledby="confirmOrder" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Al Ilm School</h5>
+                            <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Seats Confirmed</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -183,11 +238,6 @@
                 showCheckout: function() {
                     this.showLesson = this.showLesson? false: true;
                 },
-                // Confirm Order
-                submitForm (order) {
-                    alert('Order Successful');
-                },
-
             },
             computed: {
                 // Returns number of items in cart
