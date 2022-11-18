@@ -95,8 +95,8 @@
                                     <li class="list-group-item"><span v-text="lesson.Space"></span> Seats Available</span></li>
                                 </ul>
                                 <div class="card-body">
-                                    <button v-on:click="addToCart(lesson)" v-if="lesson.Space > 0">Add to Cart</button>
-                                    <button v-else disabled>Add to Cart</button>
+                                    <button class="addButton" v-on:click="addToCart(lesson)" v-if="lesson.Space > 0">Add to Cart</button>
+                                    <button class="addButton" v-else disabled>Add to Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                 <!--Cart-->
                 <h3>Cart</h3>
                 <table>
-                    <thead>
+                    <thead class="table-head">
                         <tr>
                             <th>Lesson</th>
                             <th>Location</th>
@@ -155,8 +155,8 @@
                     <strong>Phone:</strong>
                     <input v-model.number="order.phone">
                 </p>
-                <button v-if="enableSubmit" data-bs-toggle="modal" data-bs-target="#confirmSeats">Checkout</button>
-                <button disabled v-else>Checkout</button>
+                <button class="submitButton" v-if="enableSubmit" data-bs-toggle="modal" data-bs-target="#confirmSeats">Checkout</button>
+                <button class="submitButton" disabled v-else>Checkout</button>
             </div>
             <!--Confirmation Dialog-->
             <div class="modal fade" id="confirmSeats" tabindex="-1" role="dialog" aria-labelledby="confirmOrder" aria-hidden="true">
