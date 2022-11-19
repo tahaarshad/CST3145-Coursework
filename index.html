@@ -129,7 +129,7 @@
                             <th>Lesson</th>
                             <th>Location</th>
                             <th>Space</th>
-                            <th>Price</th>
+                            <th>Total Price (AED)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -143,6 +143,12 @@
                             </td>
                         </tr>
                     </tbody>
+                    <tfoot>
+                        <tr class="summary">
+                            <td class="sum" colspan="3">Sum:</td>
+                            <td>{{subTotal}}</td>
+                        </tr>
+                    </tfoot>
                 </table>
                 <br>
                 <!--Checkout Form-->
@@ -371,6 +377,16 @@
                     }
                     return tempLessons
                 },
+                // Calculates total value of cart
+                subTotal: function() {
+                    let subTotal = 0;
+
+                    for (let i = 0; i < this.cart.length; i++) {
+                        subTotal += this.cart[i].quantity * this.cart[i].lesson.Price;
+                    }
+
+                    return subTotal;
+                    },
             }
         });
     </script>
