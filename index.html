@@ -137,7 +137,7 @@
                             <td>{{item.lesson.Subject}}</td>
                             <td>{{item.lesson.Location}}</td>
                             <td>{{item.quantity}}</td>
-                            <td>{{item.lesson.Price}}</td>
+                            <td>{{item.lesson.Price * item.quantity}}</td>
                             <td>
                                 <a v-on:click="removeItem(item)"><i class="fa-solid fa-trash"></i></a>
                             </td>
