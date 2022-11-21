@@ -137,7 +137,9 @@
                         <tr v-for="item in cart">
                             <td>{{item.lesson.Subject}}</td>
                             <td>{{item.lesson.Location}}</td>
-                            <td>{{item.quantity}}</td>
+                            <td><button class="addMinus" v-on:click="removeSpace(item)"><i class="fa-solid fa-minus"></i></button>
+                                {{item.quantity}}  <button :disabled="item.quantity == 5" class="addMinus" v-on:click="addSpace(item)"><i class="fa-solid fa-plus"></i></button>
+                            </td>
                             <td>{{item.lesson.Price * item.quantity}}</td>
                             <td>
                                 <a v-on:click="removeItem(item)"><i class="fa-solid fa-trash"></i></a>
@@ -238,8 +240,22 @@
                 removeItem(item) {
                     item.lesson.Space += item.quantity;
                     let itemIndex = this.cart.indexOf(item);
-                    this.cart.splice(itemIndex, 1);
-                    
+                    this.cart.splice(itemIndex, 1);    
+                },
+                // Removes one space from the item quantity
+                removeSpace(item) {
+                    if (item.quantity === 1) {
+                        this.removeItem(item)
+                    }
+                    else {
+                        item.lesson.Space++
+                        item.quantity--
+                    }
+                // Adds one space from the item quantity  
+                },
+                addSpace(item) {
+                    item.lesson.Space--
+                    item.quantity++
                 },
                 // Checkout page toggle
                 showCheckout: function() {

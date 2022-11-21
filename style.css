@@ -91,3 +91,8 @@ th, td {
 .sum {
     text-align: center;
 }
+.addMinus {
+    background: black;
+    color: white;
+    padding: 0;
+}
