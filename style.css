@@ -1,4 +1,5 @@
 @charset "utf-8";
+/* Navbar design */
 .badge {
     position: absolute;
     margin-top: -.2rem;
@@ -20,6 +21,7 @@
     text-decoration: none;
     font-size: 17px;
 }
+/* Search input design */
 .search {
     overflow: hidden;
     padding: 14px 16px;
@@ -29,7 +31,6 @@
     display: block;
     color: black;
     text-align: center;
-    /* padding: 14px 16px; */
     text-decoration: none;
     font-size: 20px;
 }
@@ -39,6 +40,7 @@
 .search label {
     font-size: 20px;
 }
+/* Button design */
 .addButton {
     background: #e9e9e9;
     color: black;
@@ -53,8 +55,8 @@
 }
 button[disabled] {
     opacity: 0.5;
-   }
-
+}
+/* Form design */
 label {
     font-weight: 700;
 }
@@ -62,6 +64,7 @@ input[type=text] {
     width: 50%;
     border-radius: 5px;
 }
+/* Card design */
 img {
     width: 250px;
     height: 250px;
@@ -72,6 +75,7 @@ img {
 span {
     font-weight: 700;
 }
+/* Cart table design */
 table {
     width: 100%;
 }
