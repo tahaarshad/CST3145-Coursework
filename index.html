@@ -207,7 +207,7 @@
                     phone: ''
                 },
                 // Stores user input and selection
-                sortBy: 'Subject',
+                sortBy: 'Default',
                 sortOrder: 'Ascending',
                 search: '',
             },
@@ -261,7 +261,7 @@
                 showCheckout: function() {
                     this.showLesson = this.showLesson? false: true;
                 },
-                // Sort Lessons
+                // Sort Lessons based on user selection
                 sortLessons() {
                     if (this.sortBy == 'Default') {
                         this.lessons.sort((a,b) => {
@@ -277,7 +277,6 @@
                     else if (this.sortBy == 'Subject' && this.sortOrder == 'Ascending'){
                         this.lessons.sort((a,b) => {
                             let fa = a.Subject.toLowerCase(), fb = b.Subject.toLowerCase()
-          
                             if (fa < fb) {
                                 return -1
                             }
@@ -285,13 +284,11 @@
                                 return 1 
                             }
                             return 0
-
                         })
                     }
                     else if (this.sortBy == 'Subject' && this.sortOrder == 'Descending'){
                         this.lessons.sort((a,b) => {
                             let fa = a.Subject.toLowerCase(), fb = b.Subject.toLowerCase()
-          
                             if (fa < fb) {
                                 return 1
                             }
@@ -299,13 +296,11 @@
                                 return -1 
                             }
                             return 0
-
                         })
                     }
                     else if (this.sortBy == 'Location' && this.sortOrder == 'Ascending'){
                         this.lessons.sort((a,b) => {
                             let fa = a.Location.toLowerCase(), fb = b.Location.toLowerCase()
-          
                             if (fa < fb) {
                                 return -1
                             }
@@ -313,7 +308,6 @@
                                 return 1 
                             }
                             return 0
-
                         })
                     }
                     else if (this.sortBy == 'Location' && this.sortOrder == 'Descending'){
@@ -327,7 +321,6 @@
                                 return -1 
                             }
                             return 0
-
                         })
                     }
                     else if (this.sortBy == 'Price' && this.sortOrder == 'Ascending'){
@@ -339,7 +332,6 @@
                                 return 1 
                             }
                             return 0
-
                         })
                     }
                     else if (this.sortBy == 'Price' && this.sortOrder == 'Descending'){
@@ -351,7 +343,6 @@
                                 return -1 
                             }
                             return 0
-
                         })
                     }
                     else if (this.sortBy == 'Availability' && this.sortOrder == 'Ascending'){
@@ -363,7 +354,6 @@
                                 return 1 
                             }
                             return 0
-
                         })
                     }
                     else if (this.sortBy == 'Availability' && this.sortOrder == 'Descending'){
@@ -378,7 +368,6 @@
 
                         })
                     }
-
                 },
             },
             computed: {
@@ -396,7 +385,7 @@
                     let isletter = /^[A-Za-z]+$/.test(this.order.name);
                     return isnum == true && isletter == true
                  },
-                // Filters lessons based on user input and sorts results based on user selection
+                // Filters lessons based on user input
                 filteredLessons () {
                     let tempLessons = this.lessons;
                     if (this.search != '' && this.search) {
@@ -412,16 +401,13 @@
                 // Calculates total value of cart
                 subTotal: function() {
                     let subTotal = 0;
-
                     for (let i = 0; i < this.cart.length; i++) {
                         subTotal += this.cart[i].quantity * this.cart[i].lesson.Price;
                     }
-
                     return subTotal;
                     },
             }
         });
-    </script>
-    
+    </script>  
 </body>
 </html>
